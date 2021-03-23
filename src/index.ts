@@ -11,7 +11,7 @@ export const miniLottie = (data: LottieData, config: Config = {}) => {
   }
   console.log('dropKeyList', dropKeyList, data);
   dropKey(data, dropKeyList);
-
+  fixAttrIndIsUndefined(data);
   return data;
 };
 
@@ -28,4 +28,23 @@ export const dropKey = (data: any, dropKeyList: string[] = []) => {
       dropKey(data[k], dropKeyList);
     }
   }
+};
+
+// from https://github1s.com/fancy-lottie/lottie-compress/blob/HEAD/src/main.ts
+const fixAttrIndIsUndefined = (data: any) => {
+  data.layers.forEach((layer: any, index: number) => {
+    if (layer.ind === undefined) {
+      layer.ind = index + 1;
+    }
+  });
+  data.assets.forEach((asset: any) => {
+    if (asset.layers) {
+      asset.layers.forEach((layer: any, index: number) => {
+        if (layer.ind === undefined) {
+          layer.ind = index + 1;
+        }
+      });
+    }
+  });
+  return data;
 };
