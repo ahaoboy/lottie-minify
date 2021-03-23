@@ -1,8 +1,11 @@
 {
   "version": "0.1.0",
-  "license": "MIT",
+  "name": "lottie-mini",
+  "author": "ahaoboy",
+  "module": "dist/lottie-mini.esm.js",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "license": "MIT",
   "files": [
     "dist",
     "src"
@@ -31,9 +34,6 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "lottie-mini",
-  "author": "ahaoboy",
-  "module": "dist/lottie-mini.esm.js",
   "devDependencies": {
     "husky": "^5.2.0",
     "tsdx": "^0.14.1",

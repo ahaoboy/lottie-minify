@@ -12,6 +12,8 @@ describe('mini', () => {
       const newData = miniLottie(oldData, { copy: true });
       const newStr = JSON.stringify(newData);
       writeFileSync(outPath, newStr, { encoding: 'utf8' });
+
+      // lottie: old: 77118, mini:75828
       console.log(`${name}: old: ${oldStr.length}, mini:${newStr.length}`);
     }
   });

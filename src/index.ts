@@ -21,11 +21,11 @@ export const dropKey = (data: any, dropKeyList: string[] = []) => {
   } else if (typeof data === 'object') {
     for (const k of dropKeyList) {
       if (k in data && data[k]) {
-        console.log('k', k);
         delete data[k];
       }
     }
-    data.assets && dropKey(data.assets, dropKeyList);
-    data.layers && dropKey(data.layers, dropKeyList);
+    for (let k in data) {
+      dropKey(data[k], dropKeyList);
+    }
   }
 };
