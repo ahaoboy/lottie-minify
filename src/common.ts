@@ -1,7 +1,6 @@
 import { Config } from './type';
-import { LottieData } from 'type';
 
-export const clone = (data: LottieData): LottieData => {
+export const clone = <T>(data: T): T => {
   if (typeof data !== 'object') throw new Error('lottie data type error!');
   return JSON.parse(JSON.stringify(data));
 };
@@ -9,7 +8,7 @@ export const clone = (data: LottieData): LottieData => {
 export const merge = <T>(left: T, right: T) => {
   return { ...left, ...right };
 };
-export const defaultDropKeyList = ['nm', 'tyName', 'n', 'mn'];
+export const defaultDropKeyList = ['nm', 'tyName', 'n', 'mn', 'cl', 'ln'];
 
 export const defaultConfig: Config = {
   copy: false,

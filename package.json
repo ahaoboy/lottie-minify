@@ -1,5 +1,5 @@
 {
-  "version": "0.1.1",
+  "version": "0.1.2",
   "name": "lottie-mini",
   "author": "ahaoboy",
   "module": "dist/lottie-mini.esm.js",
@@ -18,7 +18,7 @@
     "dev": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test",
-    "lint": "tsdx lint",
+    "lint": "tsdx lint src",
     "pub": "npm publish",
     "prepare": "tsdx build"
   },

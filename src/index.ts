@@ -1,15 +1,13 @@
 import { clone, merge } from './common';
-import { Config } from './type';
-import { LottieData } from './type';
+import { Config, ILottieJSON } from './type';
 import { defaultConfig } from './common';
 
-export const miniLottie = (data: LottieData, config: Config = {}) => {
+export const miniLottie = (data: ILottieJSON, config: Config = {}) => {
   config = merge(defaultConfig, config);
   const { copy, dropKeyList } = config;
   if (copy) {
     data = clone(data);
   }
-  console.log('dropKeyList', dropKeyList, data);
   dropKey(data, dropKeyList);
   fixAttrIndIsUndefined(data);
   return data;
