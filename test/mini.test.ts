@@ -13,8 +13,12 @@ describe('mini', () => {
       const newStr = JSON.stringify(newData);
       writeFileSync(outPath, newStr, { encoding: 'utf8' });
 
-      // lottie: old: 77118, mini:75828
-      console.log(`${name}: old: ${oldStr.length}, mini:${newStr.length}`);
+      const oldSize = oldStr.length;
+      const newSize = newStr.length;
+      // lottie: old: 77118, mini:75828, del:1290
+      console.log(
+        `${name}: old: ${oldSize}, mini:${newSize}, del:${oldSize - newSize}`
+      );
     }
   });
 });
