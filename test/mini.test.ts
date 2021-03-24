@@ -15,9 +15,11 @@ describe('mini', () => {
 
       const oldSize = oldStr.length;
       const newSize = newStr.length;
-      // lottie: old: 77118, mini:75828, del:1290
+      const rate = (((newSize / oldSize) * 10000) | 0) / 100;
+      // lottie: old: 246900, mini:66822, del:180078, rate:27.06%
       console.log(
-        `${name}: old: ${oldSize}, mini:${newSize}, del:${oldSize - newSize}`
+        `${name}: old: ${oldSize}, mini:${newSize}, del:${oldSize -
+          newSize}, rate:${rate}%`
       );
     }
   });
