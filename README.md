@@ -13,7 +13,7 @@ const miniData = miniLottie(data, config);
 
 ## config
 
-| key      | type     | default                     | desc             |
-| -------- | -------- | --------------------------- | ---------------- |
-| copy     | boolean  | false                       | copy source data |
-| dropList | string[] | ['nm', 'tyName', 'n', 'mn'] | dropKeyList      |
+| key      | type     | default                                 | desc             |
+| -------- | -------- | --------------------------------------- | ---------------- |
+| copy     | boolean  | false                                   | copy source data |
+| dropList | string[] | ['nm', 'tyName', 'n', 'mn', 'cl', 'ln'] | dropKeyList      |
