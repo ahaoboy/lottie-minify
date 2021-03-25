@@ -14,6 +14,7 @@ export const miniLottie = (data: ILottieJSON, config: Config = {}) => {
 };
 
 export const dropKey = (data: any, dropKeyList: string[] = []) => {
+  if(!data) return;
   if (Array.isArray(data)) {
     data.forEach(item => dropKey(item, dropKeyList));
   } else if (typeof data === 'object') {
