@@ -13,7 +13,7 @@ export const defaultDropKeyList = ['nm', 'tyName', 'n', 'mn', 'cl', 'ln'];
 export const defaultConfig: Config = {
   copy: false,
   dropKeyList: defaultDropKeyList,
-  numberFixLength: 2,
+  numberFixLength: 3,
 };
 
 export const isNil = <T>(x: T) => x === null || x === undefined;

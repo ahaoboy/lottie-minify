@@ -13,14 +13,14 @@ export const minify = (data: ILottieJSON, config: Config = {}) => {
 };
 
 const walk = (_data: any, config: Config) => {
-  const { dropKeyList = [], numberFixLength = 2 } = config;
+  const { dropKeyList = [], numberFixLength = 3 } = config;
   const numberFixFun = fixed(numberFixLength);
   const refIdList: string[] = [];
   const getRefId = (id: string) => {
     const i = refIdList.indexOf(id);
     if (i !== -1) return i;
     refIdList.push(id);
-    return refIdList.length - 1;
+    return (refIdList.length - 1).toString(36);
   };
   const dfs = (data: any) => {
     if (isNil(data)) throw new Error('lottie value is null or undefined');
