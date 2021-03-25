@@ -24,6 +24,8 @@ const walk = (_data: any, config: Config) => {
   };
   const dfs = (data: any) => {
     if (isNil(data)) throw new Error('lottie value is null or undefined');
+    if (typeof data === 'string') return;
+    if (typeof data === 'number') return;
     if (Array.isArray(data)) {
       data.forEach((item, k) => {
         if (isNumber(item)) {
@@ -41,14 +43,13 @@ const walk = (_data: any, config: Config) => {
       for (let k in data) {
         if (isNumber(data[k])) {
           data[k] = numberFixFun(data[k]);
-        }
-        if (k === 'refId') {
+        } else if (k === 'refId') {
           data['refId'] = getRefId(data[k]);
-        }
-        if (k === 'id') {
+        } else if (k === 'id') {
           data['id'] = getRefId(data[k]);
+        } else {
+          dfs(data[k]);
         }
-        dfs(data[k]);
       }
     }
   };
