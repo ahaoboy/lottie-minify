@@ -18,7 +18,7 @@ const walk = (_data: any, config: Config) => {
   const refIdList: string[] = [];
   const getRefId = (id: string) => {
     const i = refIdList.indexOf(id);
-    if (i !== -1) return i;
+    if (i !== -1) return i.toString(36);
     refIdList.push(id);
     return (refIdList.length - 1).toString(36);
   };
