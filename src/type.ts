@@ -7,6 +7,7 @@ export interface LottieData {
 export type Config = {
   copy?: boolean;
   dropKeyList?: string[];
+  numberFixLength?: number;
 };
 
 // lottie layer

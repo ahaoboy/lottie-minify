@@ -1,31 +1,55 @@
-import { clone, merge } from './common';
+import { clone, merge, defaultConfig, isNil, fixed, isNumber } from './common';
 import { Config, ILottieJSON } from './type';
-import { defaultConfig } from './common';
-
 export const minify = (data: ILottieJSON, config: Config = {}) => {
   config = merge(defaultConfig, config);
-  const { copy, dropKeyList } = config;
+  const { copy } = config;
   if (copy) {
     data = clone(data);
   }
-  dropKey(data, dropKeyList);
+
+  walk(data, config);
   fixAttrIndIsUndefined(data);
   return data;
 };
 
-export const dropKey = (data: any, dropKeyList: string[] = []) => {
-  if (Array.isArray(data)) {
-    data.forEach(item => dropKey(item, dropKeyList));
-  } else if (typeof data === 'object') {
-    for (const k of dropKeyList) {
-      if (k in data && data[k]) {
-        delete data[k];
+const walk = (_data: any, config: Config) => {
+  const { dropKeyList = [], numberFixLength = 2 } = config;
+  const numberFixFun = fixed(numberFixLength);
+  const refIdList: string[] = [];
+  const getRefId = (id: string) => {
+    const i = refIdList.indexOf(id);
+    if (i !== -1) return i;
+    refIdList.push(id);
+    return refIdList.length - 1;
+  };
+  const dfs = (data: any) => {
+    if (isNil(data)) throw new Error('lottie value is null or undefined');
+    if (Array.isArray(data)) {
+      data.forEach((item, k) => {
+        if (isNumber(item)) {
+          data[k] = numberFixFun(item);
+        } else {
+          dfs(item);
+        }
+      });
+    } else if (typeof data === 'object') {
+      for (const k of dropKeyList) {
+        if (k in data && data[k]) {
+          delete data[k];
+        }
+      }
+      for (let k in data) {
+        if (isNumber(data[k])) {
+          data[k] = numberFixFun(data[k]);
+        }
+        if (k === 'refId') {
+          data['refId'] = getRefId(data[k]);
+        }
+        dfs(data[k]);
       }
     }
-    for (let k in data) {
-      dropKey(data[k], dropKeyList);
-    }
-  }
+  };
+  dfs(_data);
 };
 
 // from https://github1s.com/fancy-lottie/lottie-compress/blob/HEAD/src/main.ts
