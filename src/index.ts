@@ -2,7 +2,7 @@ import { clone, merge } from './common';
 import { Config, ILottieJSON } from './type';
 import { defaultConfig } from './common';
 
-export const miniLottie = (data: ILottieJSON, config: Config = {}) => {
+export const minify = (data: ILottieJSON, config: Config = {}) => {
   config = merge(defaultConfig, config);
   const { copy, dropKeyList } = config;
   if (copy) {

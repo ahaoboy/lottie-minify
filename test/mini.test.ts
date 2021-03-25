@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import { readFileSync, writeFileSync } from 'fs';
-import { miniLottie } from '../src/index';
+import { minify } from '../src/index';
 describe('mini', () => {
   it('compress', () => {
     const fileList = ['lottie'];
@@ -9,7 +9,7 @@ describe('mini', () => {
       const outPath = resolve('./test', 'out', `${name}.json`);
       const oldStr = readFileSync(inPath, { encoding: 'utf8' });
       const oldData = JSON.parse(oldStr);
-      const newData = miniLottie(oldData, { copy: true });
+      const newData = minify(oldData, { copy: true });
       const newStr = JSON.stringify(newData);
       writeFileSync(outPath, newStr, { encoding: 'utf8' });
 

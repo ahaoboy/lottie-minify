@@ -1,14 +1,14 @@
 ## install
 
 ```
-npm i lottie-mini
+npm i lottie-minify
 ```
 
 ## use
 
 ```
-import { miniLottie } from 'lottie-mini';
-const miniData = miniLottie(data, config);
+import { minify } from 'lottie-minify';
+const miniData = minify(data, config);
 ```
 
 ## config
