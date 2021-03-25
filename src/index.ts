@@ -45,6 +45,9 @@ const walk = (_data: any, config: Config) => {
         if (k === 'refId') {
           data['refId'] = getRefId(data[k]);
         }
+        if (k === 'id') {
+          data['id'] = getRefId(data[k]);
+        }
         dfs(data[k]);
       }
     }
