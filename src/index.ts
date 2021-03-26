@@ -1,5 +1,7 @@
 import { clone, merge, defaultConfig, isNil, fixed, isNumber } from './common';
 import { Config, ILottieJSON } from './type';
+export * from './type';
+
 export const minify = (data: ILottieJSON, config: Config = {}) => {
   config = merge(defaultConfig, config);
   const { copy } = config;
@@ -17,15 +19,16 @@ const walk = (_data: any, config: Config) => {
   const numberFixFun = fixed(numberFixLength);
   const refIdList: string[] = [];
   const getRefId = (id: string) => {
-    const i = refIdList.indexOf(id);
-    if (i !== -1) return i.toString(36);
-    refIdList.push(id);
-    return (refIdList.length - 1).toString(36);
+    let i = refIdList.indexOf(id);
+    if (i === -1) {
+      refIdList.push(id);
+      i = refIdList.length - 1;
+    }
+    return i;
   };
   const dfs = (data: any) => {
     if (isNil(data)) throw new Error('lottie value is null or undefined');
-    if (typeof data === 'string') return;
-    if (typeof data === 'number') return;
+    if (typeof data === 'string' || typeof data === 'number') return;
     if (Array.isArray(data)) {
       data.forEach((item, k) => {
         if (isNumber(item)) {
