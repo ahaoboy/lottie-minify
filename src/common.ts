@@ -5,12 +5,13 @@ export const clone = <T>(data: T): T => {
   return JSON.parse(JSON.stringify(data));
 };
 
-export const merge = <T>(left: T, right: T) => {
-  return { ...left, ...right };
+export const merge = <T, P>(target: T, source: P) => {
+  return Object.assign<T, P>(target, source);
 };
+
 export const defaultDropKeyList = ['nm', 'tyName', 'n', 'mn', 'cl', 'ln'];
 
-export const defaultConfig: Config = {
+export const defaultConfig: Required<Config> = {
   copy: false,
   dropKeyList: defaultDropKeyList,
   numberFixLength: 3,

@@ -10,19 +10,19 @@ export const minify = (data: ILottieJSON | string, config: Config = {}) => {
   )
     throw new Error('lottie data must be String or Object');
 
-  config = merge(defaultConfig, config);
-  const { copy } = config;
+  const mergeConfig = merge(defaultConfig, config);
+  const { copy } = mergeConfig;
   if (copy) {
     data = clone(data);
   }
 
-  walk(data, config);
+  walk(data, mergeConfig);
   fixAttrIndIsUndefined(data);
   return data;
 };
 
-const walk = (_data: any, config: Config) => {
-  const { dropKeyList = [], numberFixLength = 3 } = config;
+const walk = (lottieData: any, config: Required<Config>) => {
+  const { dropKeyList, numberFixLength } = config;
   const numberFixFun = fixed(numberFixLength);
   const refIdList: string[] = [];
   const getRefId = (id: string) => {
@@ -63,17 +63,17 @@ const walk = (_data: any, config: Config) => {
       }
     }
   };
-  dfs(_data);
+  dfs(lottieData);
 };
 
 // from https://github1s.com/fancy-lottie/lottie-compress/blob/HEAD/src/main.ts
-const fixAttrIndIsUndefined = (data: any) => {
-  data.layers.forEach((layer: any, index: number) => {
+const fixAttrIndIsUndefined = (lottieData: any) => {
+  lottieData.layers.forEach((layer: any, index: number) => {
     if (layer.ind === undefined) {
       layer.ind = index + 1;
     }
   });
-  data.assets.forEach((asset: any) => {
+  lottieData.assets.forEach((asset: any) => {
     if (asset.layers) {
       asset.layers.forEach((layer: any, index: number) => {
         if (layer.ind === undefined) {
@@ -82,5 +82,5 @@ const fixAttrIndIsUndefined = (data: any) => {
       });
     }
   });
-  return data;
+  return lottieData;
 };
