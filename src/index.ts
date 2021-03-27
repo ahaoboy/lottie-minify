@@ -2,7 +2,14 @@ import { clone, merge, defaultConfig, isNil, fixed, isNumber } from './common';
 import { Config, ILottieJSON } from './type';
 export * from './type';
 
-export const minify = (data: ILottieJSON, config: Config = {}) => {
+export const minify = (data: ILottieJSON | string, config: Config = {}) => {
+  if (
+    isNil(data) ||
+    (typeof data !== 'string' && typeof data !== 'object') ||
+    Array.isArray(data)
+  )
+    throw new Error('lottie data must be String or Object');
+
   config = merge(defaultConfig, config);
   const { copy } = config;
   if (copy) {
