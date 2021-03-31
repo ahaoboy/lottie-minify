@@ -40,5 +40,23 @@
     "typescript": "^4.2.3"
   },
   "dependencies": {
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahaoboy/lottie-minify"
+  },
+  "bugs": {
+    "url": "https://github.com/ahaoboy/lottie-minify/issues"
+  },
+  "keywords": [
+    "lottie",
+    "lottie compression",
+    "lottie minify"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ],
 }
