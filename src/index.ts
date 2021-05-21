@@ -7,8 +7,9 @@ export const minify = (data: ILottieJSON | string, config: Config = {}) => {
     isNil(data) ||
     (typeof data !== 'string' && typeof data !== 'object') ||
     Array.isArray(data)
-  )
+  ) {
     throw new Error('lottie data must be String or Object');
+  }
 
   const mergeConfig = merge(defaultConfig, config);
   const { copy } = mergeConfig;
@@ -34,7 +35,10 @@ const walk = (lottieData: any, config: Required<Config>) => {
     return i;
   };
   const dfs = (data: any) => {
-    if (isNil(data)) throw new Error('lottie value is null or undefined');
+    if (isNil(data)) {
+      console.error('lottieJson value has null or undefined');
+      return;
+    }
     if (typeof data === 'string' || typeof data === 'number') return;
     if (Array.isArray(data)) {
       data.forEach((item, k) => {
