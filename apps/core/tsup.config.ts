@@ -12,6 +12,7 @@ export default defineConfig((options) => {
     external: [],
     noExternal: [],
     platform: 'browser',
+    dts: true,
   };
 
   return [{ ...common, entry: ['./src/index.ts'], outDir: './dist' }];
