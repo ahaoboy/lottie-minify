@@ -398,6 +398,11 @@
       "packageName": "lottie-minify-web",
       "projectFolder": "apps/web",
       "shouldPublish": false
+    },
+    {
+      "packageName": "lottie-minify-tool",
+      "projectFolder": "apps/tool",
+      "shouldPublish": false
     }
     // {
     //   /**

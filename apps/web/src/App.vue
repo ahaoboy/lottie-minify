@@ -6,13 +6,21 @@ import LottieWeb from "lottie-web";
 import { onMounted } from "vue";
 
 onMounted(async () => {
-  const c = document.getElementById("canvas")!;
+  const c1 = document.getElementById("canvas1")!;
   setTimeout(async () => {
-    const url = await import("../lottie/v2/data.json?lottie");
-    console.log("url", url);
+    const c2 = document.getElementById("canvas2")!;
+    const { default: data } = await import("../lottie/v2/data.json?lottie");
+    console.log("url", data);
+    LottieWeb.loadAnimation({
+      container: c2, // the dom element that will contain the animation
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      animationData: data,
+    });
   }, 2000);
   LottieWeb.loadAnimation({
-    container: c, // the dom element that will contain the animation
+    container: c1, // the dom element that will contain the animation
     renderer: "svg",
     loop: true,
     autoplay: true,
@@ -22,7 +30,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div id="canvas"></div>
+  <div id="canvas1"></div>
+  <div id="canvas2"></div>
 </template>
 
 <style>
