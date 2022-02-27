@@ -69,3 +69,5 @@ common/autoinstallers/*/.npmrc
 
 apps/dist
 pnpm-lock.yaml
+
+dist

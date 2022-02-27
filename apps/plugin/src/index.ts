@@ -1,5 +1,5 @@
 import { createUnplugin } from "unplugin";
-import { readFileSync, writeFileSync } from "fs";
+import { readFileSync } from "fs";
 import { join, sep } from "path";
 import { lottieMinify } from "lottie-minify";
 import type { ILottieJSON } from "lottie-minify";
@@ -46,8 +46,6 @@ const getCode = (url: string, option: Option): string => {
     ${pathBlock}
     export default data;
   `;
-
-  writeFileSync("c.txt", code);
   return code;
 };
 const defaultOption: Option = {
@@ -65,7 +63,6 @@ export const unplugin = createUnplugin((option: Partial<Option> = {}) => {
       if (!id.includes(".json?lottie")) {
         return code;
       }
-      writeFileSync("code.txt", code);
       return getCode(id, opt);
     },
   };
