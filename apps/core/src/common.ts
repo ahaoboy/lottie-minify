@@ -1,11 +1,11 @@
-import { Config } from './type';
+import { Config } from "./type";
 
 export const clone = <T>(data: T): T => {
-  if (typeof data !== 'object') throw new Error('lottie data type error!');
+  if (typeof data !== "object") throw new Error("lottie data type error!");
   return JSON.parse(JSON.stringify(data));
 };
 
-export const defaultDropKeyList = ['nm', 'tyName', 'n', 'mn', 'cl', 'ln'];
+export const defaultDropKeyList = ["nm", "tyName", "n", "mn", "cl", "ln"];
 
 export const defaultConfig: Required<Config> = {
   copy: false,
@@ -22,6 +22,6 @@ export const fixed = (length: number) => {
   };
 };
 
-export const isNumber = (n: any) => {
-  return typeof n === 'number';
+export const isNumber = (n: any): n is number => {
+  return typeof n === "number";
 };

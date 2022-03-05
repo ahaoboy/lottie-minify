@@ -23,7 +23,7 @@ export const lottieMinify = (data: LottieJSON, config: Config = {}) => {
   return data;
 };
 
-const walk = (lottieData: any, config: Required<Config>) => {
+const walk = (lottieData: LottieJSON, config: Required<Config>) => {
   const { dropKeyList, numberFixLength } = config;
   const numberFixFun = fixed(numberFixLength);
   const refIdList: string[] = [];
@@ -70,7 +70,7 @@ const walk = (lottieData: any, config: Required<Config>) => {
   dfs(lottieData);
 };
 
-// from https://github1s.com/fancy-lottie/lottie-compress/blob/HEAD/src/main.ts
+// https://github1s.com/fancy-lottie/lottie-compress/blob/HEAD/src/main.ts
 const fixAttrIndIsUndefined = (lottieData: any) => {
   lottieData.layers.forEach((layer: any, index: number) => {
     if (layer.ind === undefined) {
