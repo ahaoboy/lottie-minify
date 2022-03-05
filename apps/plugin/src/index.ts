@@ -1,8 +1,8 @@
 import { createUnplugin } from "unplugin";
 import { readFileSync } from "fs";
-import { join, sep } from "path";
 import { lottieMinify } from "lottie-minify";
 import type { ILottieJSON } from "lottie-minify";
+
 type Option = {
   stringify: (data: ILottieJSON) => string;
   numberFixLength: number;
@@ -23,7 +23,7 @@ const getCode = (url: string, option: Option): string => {
     const { id, p = "", u = "" } = item;
     if (p.startsWith("data:image")) continue;
     if (u || p) {
-      const imgPath = "." + sep + join(u, p);
+      const imgPath = "./" + [u, p].join("/");
       assetsMap[id] = imgPath;
     }
   }
