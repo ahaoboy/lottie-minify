@@ -1,10 +1,10 @@
 import { createUnplugin } from "unplugin";
 import { readFileSync } from "fs";
 import { lottieMinify } from "lottie-minify";
-import type { ILottieJSON } from "lottie-minify";
+import type { LottieJSON } from "lottie-type";
 
 type Option = {
-  stringify: (data: ILottieJSON) => string;
+  stringify: (data: LottieJSON) => string;
   numberFixLength: number;
   dropKeyList: string[];
 };

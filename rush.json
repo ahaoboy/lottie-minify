@@ -403,6 +403,10 @@
       "packageName": "lottie-minify-tool",
       "projectFolder": "apps/tool",
       "shouldPublish": false
+    },{
+      "packageName": "lottie-type",
+      "projectFolder": "apps/type",
+      "shouldPublish": false
     }
     // {
     //   /**

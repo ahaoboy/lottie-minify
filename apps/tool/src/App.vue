@@ -9,17 +9,9 @@
               class="site-link"
               target="_blank"
               href="https://design.alipay.com/lolita"
-              >lolita</a
-            >
-            <a class="site-link" target="_blank" href="https://lottiefiles.com/"
-              >lottiefiles</a
-            >
-            <a
-              class="site-link"
-              target="_blank"
-              href="https://design.alipay.com/emotion"
-              >emotion</a
-            >
+            >lolita</a>
+            <a class="site-link" target="_blank" href="https://lottiefiles.com/">lottiefiles</a>
+            <a class="site-link" target="_blank" href="https://design.alipay.com/emotion">emotion</a>
           </div>
         </div>
         <div class="type-wrap">
@@ -33,16 +25,8 @@
           <el-button @click="upload">上传</el-button>
           <el-button :icon="CaretLeft"></el-button>
           <el-button @click="playLottie(0)" :icon="Refresh"></el-button>
-          <el-button
-            @click="clickStart"
-            v-if="!state.lottiePlaying"
-            :icon="VideoPlay"
-          ></el-button>
-          <el-button
-            @click="pauseLottie"
-            v-if="state.lottiePlaying"
-            :icon="VideoPause"
-          ></el-button>
+          <el-button @click="clickStart" v-if="!state.lottiePlaying" :icon="VideoPlay"></el-button>
+          <el-button @click="pauseLottie" v-if="state.lottiePlaying" :icon="VideoPause"></el-button>
           <el-button :icon="CaretRight"></el-button>
           <el-button @click="downloadSingle">下载</el-button>
         </div>
@@ -66,20 +50,14 @@
       :min="minFrame"
       :max="maxFrame"
       show-input
-      style="width: 70%; margin: 20px;"
+      style="width: 70%; margin: 20px"
     ></el-slider>
     <div id="lottie"></div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {
-  CaretLeft,
-  CaretRight,
-  Refresh,
-  VideoPause,
-  VideoPlay,
-} from "@element-plus/icons-vue";
+import { CaretLeft, CaretRight, Refresh, VideoPause, VideoPlay } from '@element-plus/icons-vue'
 import JSZip from "jszip";
 import path from "path-browserify";
 import LottieWeb from "lottie-web";
@@ -87,23 +65,23 @@ import type { AnimationItem } from "lottie-web";
 import { computed, reactive, toRaw, watch } from "vue";
 import { throttle, cloneDeep, isNil } from "lodash-es";
 import { readFile, stringToUrl, downloadUrl, getBase64 } from "./util";
-import { ILottieJSON, lottieMinify } from "lottie-minify";
-
+import { lottieMinify } from "lottie-minify";
+import { LottieJson } from 'lottie-type'
 const miniConfig = reactive({
   copy: true,
-});
+})
 type State = {
-  lottieProgress: number;
-  lottiePlaying: boolean;
-  lottieJson: ILottieJSON;
-  ins: AnimationItem;
-  renderType: "svg" | "canvas";
-  numberFixLength: number;
-};
+  lottieProgress: number,
+  lottiePlaying: boolean,
+  lottieJson: LottieJson,
+  ins: AnimationItem,
+  renderType: "svg" | 'canvas',
+  numberFixLength: number,
+}
 const state: State = reactive({
   lottieProgress: 0,
   lottiePlaying: false,
-  lottieJson: {} as ILottieJSON,
+  lottieJson: {} as LottieJson,
   ins: {} as AnimationItem,
   renderType: "svg",
   numberFixLength: 3,
@@ -213,7 +191,6 @@ const upload = async () => {
     for (const k in zip.files) {
       if (k.startsWith(".") || k.includes("__MACOSX")) continue;
       const f = zip.files[k];
-      console.log("fff", f);
       if (f.dir) {
         //  文件夹
       } else {
@@ -227,18 +204,16 @@ const upload = async () => {
     }
   }
   for (const item of lottieJson.assets) {
-    console.log("===item", item);
     const p = item.p || "";
     const u = item.u || "";
     if (Boolean(u) || Boolean(p)) {
       const _p = u + p;
-      console.log("===p", _p, p, u);
       if (_p.startsWith?.("http") || _p.startsWith?.("//")) {
         const url = "data:image/jpeg;base64," + (await getBase64(_p));
         item.p = url;
       } else if (zip) {
-        const newPath = path.join(lottieJsonRoot, item.u ?? "", item.p ?? "");
-      console.log("===newPath", newPath);
+        const newPath = path.join(lottieJsonRoot, item.u, item.p);
+        console.log("p,u", item, p, u, newPath, zip.files[newPath]);
         if (!zip.files[newPath]) continue;
         item.u = "";
 
@@ -266,7 +241,7 @@ const downloadSingle = () => {
 };
 </script>
 
-<style lang="less">
+<style lang="less"  >
 body,
 html {
   width: 100vw;

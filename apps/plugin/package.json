@@ -37,10 +37,9 @@
   "author": "yanyuhao.joy",
   "license": "ISC",
   "dependencies": {
-    "@nuxt/devalue": "^2.0.0",
+    "lottie-type": "workspace:*",
     "@rollup/pluginutils": "^4.1.2",
     "lottie-minify": "workspace:*",
-    "tosource": "^2.0.0-alpha.3",
     "unplugin": "^0.3.2"
   },
   "devDependencies": {

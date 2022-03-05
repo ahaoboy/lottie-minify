@@ -1,14 +1,15 @@
-import { clone, defaultConfig, isNil, fixed, isNumber } from './common';
-import { Config, ILottieJSON } from './type';
-export * from './type';
+import { clone, defaultConfig, isNil, fixed, isNumber } from "./common";
+import { Config } from "./type";
+export * from "./type";
+import { LottieJSON } from "lottie-type";
 
-export const lottieMinify = (data: ILottieJSON, config: Config = {}) => {
+export const lottieMinify = (data: LottieJSON, config: Config = {}) => {
   if (
     isNil(data) ||
-    (typeof data !== 'string' && typeof data !== 'object') ||
+    (typeof data !== "string" && typeof data !== "object") ||
     Array.isArray(data)
   ) {
-    throw new Error('lottie data must be String or Object');
+    throw new Error("lottie data must be String or Object");
   }
 
   const mergeConfig = { ...defaultConfig, ...config };
@@ -38,7 +39,7 @@ const walk = (lottieData: any, config: Required<Config>) => {
     if (isNil(data)) {
       return;
     }
-    if (typeof data === 'string' || typeof data === 'number') return;
+    if (typeof data === "string" || typeof data === "number") return;
     if (Array.isArray(data)) {
       data.forEach((item, k) => {
         if (isNumber(item)) {
@@ -47,7 +48,7 @@ const walk = (lottieData: any, config: Required<Config>) => {
           dfs(item);
         }
       });
-    } else if (typeof data === 'object') {
+    } else if (typeof data === "object") {
       for (const k of dropKeyList) {
         if (k in data && data[k]) {
           delete data[k];
@@ -56,10 +57,10 @@ const walk = (lottieData: any, config: Required<Config>) => {
       for (let k in data) {
         if (isNumber(data[k])) {
           data[k] = numberFixFun(data[k]);
-        } else if (k === 'refId') {
-          data['refId'] = getRefId(data[k]);
-        } else if (k === 'id') {
-          data['id'] = getRefId(data[k]);
+        } else if (k === "refId") {
+          data["refId"] = getRefId(data[k]);
+        } else if (k === "id") {
+          data["id"] = getRefId(data[k]);
         } else {
           dfs(data[k]);
         }
