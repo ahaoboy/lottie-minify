@@ -2,20 +2,26 @@ import { createUnplugin } from "unplugin";
 import { readFileSync } from "fs";
 import { lottieMinify } from "lottie-minify";
 import type { LottieJSON } from "lottie-type";
-
-type Option = {
+import { relative, resolve, dirname } from "path";
+export type Option = {
   stringify: (data: LottieJSON) => string;
   numberFixLength: number;
   dropKeyList: string[];
+  exportDefault: boolean;
+  exportName: string;
+  inline: boolean;
 };
 
 const getCode = (url: string, option: Option): string => {
   const path = url.split("?")[0];
   const text = readFileSync(path, "utf-8");
+  const { numberFixLength, exportName, exportDefault, inline } = option;
   const json = lottieMinify(JSON.parse(text), {
     copy: false,
-    numberFixLength: option.numberFixLength,
+    numberFixLength,
   });
+
+  const jsonName = exportName ?? "lottie";
   const assets = json.assets;
   const assetsMap: Record<string, string> = {};
 
@@ -29,22 +35,39 @@ const getCode = (url: string, option: Option): string => {
   }
   const importBlock = assets
     .filter((i) => assetsMap[i.id])
-    .map((i) => `import _${i.id} from "${assetsMap[i.id]}"`)
+    .map((i) => {
+      const id = `_${i.id}`;
+      if (inline) {
+        const imgPath = resolve(dirname(path), assetsMap[i.id]);
+        const base64 =
+          "data:image/png;base64," + readFileSync(imgPath, "base64");
+        return `const ${id} = "${base64}"`;
+      }
+      return `import ${id} from "${assetsMap[i.id]}"`;
+    })
     .join("\n");
 
-  const pathBlock = assets
+  const replacePathBlock = assets
     .filter((i) => assetsMap[i.id])
     .map(
-      (i, k) => `data.assets[${k}] = {...data.assets[${k}], u:'', p: _${i.id} }`
+      (i, k) =>
+        `${jsonName}.assets[${k}] = {...${jsonName}.assets[${k}], u:'', p: _${i.id} }`
     )
     .join("\n");
 
   const dataStr = `${JSON.stringify(json)}`;
+  const exportList: string[] = [];
+  if (exportDefault) {
+    exportList.push(`export default ${jsonName};`);
+  }
+  if (exportName) {
+    exportList.push(`export { ${jsonName} };`);
+  }
   const code = `
     ${importBlock}
-    const data = ${dataStr};
-    ${pathBlock}
-    export default data;
+    const ${jsonName} = ${dataStr};
+    ${replacePathBlock}
+    ${exportList.join("\n")}
   `;
   return code;
 };
@@ -52,6 +75,9 @@ const defaultOption: Option = {
   stringify: JSON.stringify,
   numberFixLength: 3,
   dropKeyList: ["nm", "tyName", "n", "mn", "cl", "ln"],
+  exportDefault: true,
+  exportName: "lottie",
+  inline: false,
 };
 const NAME = "lottie-minify-plugin";
 export const unplugin = createUnplugin((option: Partial<Option> = {}) => {

@@ -1,6 +1,6 @@
 {
   "name": "lottie-minify",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "author": "ahaoboy",
   "module": "dist/index.mjs",
   "main": "dist/index.js",

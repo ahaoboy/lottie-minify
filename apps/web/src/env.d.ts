@@ -9,5 +9,7 @@ declare module "*.vue" {
 
 declare module "*.json?lottie" {
   const data: any;
+  const lottie: any;
   export default data;
+  export { lottie };
 }

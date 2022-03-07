@@ -7,13 +7,12 @@ npm i lottie-minify
 ## use
 
 ```
-import { minify } from 'lottie-minify';
+import { lottieMinify } from 'lottie-minify';
 
-const miniData = minify(jsonData, {copy: false});
+const miniData = lottieMinify(jsonData, {copy: false});
 miniData === jsonData // true
 
-minify(string)
-
+lottieMinify(string)
 
 ```
 
