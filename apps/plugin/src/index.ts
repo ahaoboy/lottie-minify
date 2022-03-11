@@ -2,7 +2,7 @@ import { createUnplugin } from "unplugin";
 import { readFileSync } from "fs";
 import { lottieMinify } from "lottie-minify";
 import type { LottieJSON } from "lottie-type";
-import { relative, resolve, dirname } from "path";
+import { resolve, dirname } from "path";
 export type Option = {
   stringify: (data: LottieJSON) => string;
   numberFixLength: number;
@@ -10,6 +10,7 @@ export type Option = {
   exportDefault: boolean;
   exportName: string;
   inline: boolean;
+  filter: (id: string) => boolean;
 };
 
 const getCode = (url: string, option: Option): string => {
@@ -71,6 +72,9 @@ const getCode = (url: string, option: Option): string => {
   `;
   return code;
 };
+const defaultFilter = (id: string): boolean => {
+  return id.includes(".json?lottie");
+};
 const defaultOption: Option = {
   stringify: JSON.stringify,
   numberFixLength: 3,
@@ -78,18 +82,19 @@ const defaultOption: Option = {
   exportDefault: true,
   exportName: "lottie",
   inline: false,
+  filter: defaultFilter,
 };
 const NAME = "lottie-minify-plugin";
 export const unplugin = createUnplugin((option: Partial<Option> = {}) => {
   const opt = { ...defaultOption, ...option };
   return {
     name: NAME,
-    // just like rollup transform
     transform(code, id) {
-      if (!id.includes(".json?lottie")) {
-        return code;
+      const filter = option.filter ?? defaultFilter;
+      if (filter(id)) {
+        return getCode(id, opt);
       }
-      return getCode(id, opt);
+      return code;
     },
   };
 });
