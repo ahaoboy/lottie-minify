@@ -1,0 +1,17 @@
+{
+  "name": "lottie-minify",
+  "entries": [
+    {
+      "version": "0.1.11",
+      "tag": "lottie-minify_v0.1.11",
+      "date": "Fri, 11 Mar 2022 10:57:08 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "type"
+          }
+        ]
+      }
+    }
+  ]
+}
