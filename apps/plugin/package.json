@@ -19,7 +19,9 @@
   },
   "typesVersions": {
     "*": {
-      ".": ["./dist/index.d.ts"],
+      ".": [
+        "./dist/index.d.ts"
+      ],
       "vite": [
         "./dist/vite.d.ts"
       ]
@@ -37,9 +39,9 @@
   "author": "yanyuhao.joy",
   "license": "ISC",
   "dependencies": {
-    "lottie-type": "workspace:*",
     "@rollup/pluginutils": "^4.1.2",
     "lottie-minify": "workspace:*",
+    "lottie-type": "workspace:*",
     "unplugin": "^0.3.2"
   },
   "devDependencies": {

@@ -22,6 +22,6 @@ export const fixed = (length: number) => {
   };
 };
 
-export const isNumber = (n: any): n is number => {
+export const isNumber = (n: unknown): n is number => {
   return typeof n === "number";
 };
