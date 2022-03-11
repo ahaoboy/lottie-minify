@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "lottie-minify",
+      "comment": "type",
+      "type": "patch"
+    }
+  ],
+  "packageName": "lottie-minify"
+}
