@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "lottie-minify-plugin",
+      "comment": "add filter",
+      "type": "minor"
+    }
+  ],
+  "packageName": "lottie-minify-plugin"
+}
