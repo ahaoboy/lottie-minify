@@ -65,12 +65,12 @@ const getCode = (url: string, option: Option): string => {
     exportList.push(`export { ${jsonName} };`);
   }
   const code = `
-    ${importBlock}
-    const ${jsonName} = ${dataStr};
-    ${replacePathBlock}
-    ${exportList.join("\n")}
-  `;
-  return code;
+${importBlock}
+const ${jsonName} = ${dataStr};
+${replacePathBlock}
+${exportList.join("\n")}
+`;
+  return code.trim();
 };
 const defaultFilter = (id: string): boolean => {
   return id.includes(".json?lottie");

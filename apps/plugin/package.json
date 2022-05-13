@@ -1,6 +1,6 @@
 {
   "name": "lottie-minify-plugin",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -15,6 +15,21 @@
       "import": "./dist/vite.mjs",
       "default": "./dist/vite.js",
       "require": "./dist/vite.js"
+    },
+    "./rollup": {
+      "import": "./dist/rollup.mjs",
+      "default": "./dist/rollup.js",
+      "require": "./dist/rollup.js"
+    },
+    "./webpack": {
+      "import": "./dist/webpack.mjs",
+      "default": "./dist/webpack.js",
+      "require": "./dist/webpack.js"
+    },
+    "./esbuild": {
+      "import": "./dist/esbuild.mjs",
+      "default": "./dist/esbuild.js",
+      "require": "./dist/esbuild.js"
     }
   },
   "typesVersions": {
