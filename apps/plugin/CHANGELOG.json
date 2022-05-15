@@ -2,6 +2,18 @@
   "name": "lottie-minify-plugin",
   "entries": [
     {
+      "version": "1.1.3",
+      "tag": "lottie-minify-plugin_v1.1.3",
+      "date": "Sun, 15 May 2022 06:48:43 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "change name"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.1.1",
       "tag": "lottie-minify-plugin_v1.1.1",
       "date": "Fri, 11 Mar 2022 10:57:08 GMT",
