@@ -51,7 +51,7 @@
     "pub": "npm publish"
   },
   "keywords": [],
-  "author": "yanyuhao.joy",
+  "author": "ahaoboy",
   "license": "ISC",
   "dependencies": {
     "@rollup/pluginutils": "^4.1.2",
